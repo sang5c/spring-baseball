@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>baseball</title>
+</head>
+<body>
+<script>
+    let httpRequest;
+
+    function isDuplicated(value) {
+        let split = value.split('');
+
+        for (let i = 0; i < split.length - 1; i++) {
+            for (let k = i + 1; k < split.length; k++) {
+                if (split[i] === split[k]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    function invalidInput(value) {
+        return isDuplicated(value) || value.length !== 3 || !Number.isInteger(Number(value));
+    }
+
+    function submit() {
+        let value = document.getElementById("predict").value;
+        if (invalidInput(value)) {
+            alert("입력 확인하세요!")
+            return;
+        }
+        httpRequest = new XMLHttpRequest();
+        httpRequest.onreadystatechange = alertContents;
+        httpRequest.open('GET', "http://localhost:8080/go?value=" + encodeURIComponent(value));
+        httpRequest.send();
+    }
+
+    function displayResult(score) {
+        let strike = document.getElementById("strike");
+        strike.innerText = score.strike + " STRIKE"
+
+        let ball = document.getElementById("ball");
+        ball.innerText = score.ball + " BALL"
+    }
+
+    function alertContents() {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            if (httpRequest.status === 200) {
+                let responseBody = JSON.parse(httpRequest.responseText);
+                console.log(responseBody)
+                if (responseBody.strike === 3) {
+                    alert("SUCCESS!")
+                    window.location.href = "http://localhost:8080/score";
+                }
+                displayResult(responseBody);
+            } else {
+                alert('request에 뭔가 문제가 있어요.');
+            }
+        }
+    }
+
+    function checkEnterKeyPress(e) {
+        if (e.keyCode === 13) {
+            submit();
+        }
+    }
+
+</script>
+<div>
+    <input type="text" id="predict" onkeyup="checkEnterKeyPress(event)">
+    <input type="button" onclick="submit()" value="제출">
+    <div id="score">
+        <h1 id="strike">0 STRIKE</h1>
+        <h1 id="ball">0 BALL</h1>
+    </div>
+
+</div>
+</body>
+</html>

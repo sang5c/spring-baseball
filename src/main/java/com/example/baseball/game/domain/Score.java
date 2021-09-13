@@ -14,15 +14,15 @@ public class Score {
 
     public static Score of(int strike, int ball) {
         validateStrikeAndBall(strike, ball);
-        return new Score(new Count(strike), new Count(ball));
+        return new Score(Count.of(strike), Count.of(ball));
     }
 
     public static Score zero() {
-        return new Score(new Count(0), new Count(0));
+        return new Score(Count.of(0), Count.of(0));
     }
 
     private static void validateStrikeAndBall(int strike, int ball) {
-        if (strike + ball > Game.NUMBERS_LENGTH) {
+        if (strike + ball > Numbers.NUMBERS_LENGTH) {
             throw new IllegalArgumentException(String.format(STRIKE_BALL_SUM_EXCEPTION_STR, strike + ball));
         }
     }
@@ -35,6 +35,18 @@ public class Score {
             return new Score(strike, ball.increase());
         }
         return this;
+    }
+
+    public int getStrike() {
+        return strike.getCount();
+    }
+
+    public int getBall() {
+        return ball.getCount();
+    }
+
+    public boolean isStrike() {
+        return strike.getCount() == 3;
     }
 
     @Override

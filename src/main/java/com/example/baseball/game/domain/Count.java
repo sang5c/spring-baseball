@@ -1,27 +1,45 @@
 package com.example.baseball.game.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Count {
     private static final int MIN_COUNT = 0;
     private static final int MAX_COUNT = 3;
     private static final String COUNT_RANGE_EXCEPTION_STR = "strike, ball range %d-%d, input: [%d]";
+    private static final Map<Integer, Count> cache = new HashMap<>();
+
+    static {
+        for (int i = MIN_COUNT; i <= MAX_COUNT; i++) {
+            cache.put(i, new Count(i));
+        }
+    }
 
     private final int count;
 
-    public Count(int count) {
+    private Count(int count) {
         validateRange(count);
         this.count = count;
     }
 
-    private void validateRange(int count) {
+    public static Count of(int count) {
+        validateRange(count);
+        return cache.get(count);
+    }
+
+    private static void validateRange(int count) {
         if (count < MIN_COUNT || count > MAX_COUNT) {
             throw new IllegalArgumentException(String.format(COUNT_RANGE_EXCEPTION_STR, MIN_COUNT, MAX_COUNT, count));
         }
     }
 
     public Count increase() {
-        return new Count(this.count + 1);
+        return of(this.count + 1);
+    }
+
+    public int getCount() {
+        return this.count;
     }
 
     @Override

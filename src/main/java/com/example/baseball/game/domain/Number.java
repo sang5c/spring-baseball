@@ -3,8 +3,8 @@ package com.example.baseball.game.domain;
 import java.util.Objects;
 
 public class Number {
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 9;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 9;
     private static final String OUT_OF_RANGE_STR = "range should be 1-9, input: [%d]";
 
     private final int number;
@@ -15,8 +15,12 @@ public class Number {
         this.position = position;
     }
 
-    public static Number of(String str, int position) {
+    public static Number ofString(String str, int position) {
         int number = Integer.parseInt(str);
+        return of(number, position);
+    }
+
+    public static Number of(int number, int position) {
         if (number > MAX_NUMBER || number < MIN_NUMBER) {
             throw new IllegalArgumentException(String.format(OUT_OF_RANGE_STR, number));
         }
@@ -44,6 +48,11 @@ public class Number {
     @Override
     public int hashCode() {
         return Objects.hash(number, position);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 
 }

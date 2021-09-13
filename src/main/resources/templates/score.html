@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Score Board</title>
+    <style>
+        table {
+            text-align: center;
+            border: 1px solid #444444;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #444444;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <h1>점수판입니다</h1>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>rank</th>
+        <th>username</th>
+        <th>try</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="record, iter: ${tt}">
+            <td th:text="${iter.index}+1">rank</td>
+            <td th:text="${record.username}">username</td>
+            <td th:text="${record.tryCount}">tryCount</td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

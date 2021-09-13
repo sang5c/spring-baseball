@@ -12,15 +12,15 @@ public class CountTest {
     @DisplayName("숫자를 받아 객체를 생성한다")
     @Test
     void createCount() {
-        Count count = new Count(0);
+        Count count = Count.of(0);
         assertThat(count).isNotNull();
     }
 
     @DisplayName("0-3 범위가 아니면 Exception이 발생한다.")
     @Test
     void invalidCountThrowException() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Count(-1));
-        assertThatIllegalArgumentException().isThrownBy(() -> new Count(4));
+        assertThatIllegalArgumentException().isThrownBy(() -> Count.of(-1));
+        assertThatIllegalArgumentException().isThrownBy(() -> Count.of(4));
     }
 
 }
