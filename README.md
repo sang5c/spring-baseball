@@ -4,16 +4,16 @@
 
 ### 게임 방법
 - 이름 입력시 세 자리 랜덤한 숫자 생성
-  - ![img.png](images/main.png)
+  - ![img.png](https://github.com/sang5c/spring-baseball/blob/main/images/main.png)
 - 세자리 숫자를 예상하여 제출할 수 있음.
   - 같은 자리 같은 숫자 -> strike
   - 다른 자리 같은 숫자 -> ball
   - 숫자가 일치하지 않는 경우 -> 0 strike 0 ball
   - 예1) 문제: 123, 답: 321 -> 2 ball 1 strike
   - 예2) 문제: 426, 답: 543 -> 1 ball
-  - ![img.png](images/predict.png)
+  - ![img.png](https://github.com/sang5c/spring-baseball/blob/main/images/predict.png)
 - 3개의 숫자를 모두 맞히면 게임이 종료.
-  - ![img_1.png](images/score.png)
+  - ![img_1.png](https://github.com/sang5c/spring-baseball/blob/main/images/score.png)
 
 ### 코드 설명
 - 지키려고 노력한 규칙들
