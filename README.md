@@ -9,13 +9,14 @@
   - 같은 자리 같은 숫자 -> strike
   - 다른 자리 같은 숫자 -> ball
   - 숫자가 일치하지 않는 경우 -> 0 strike 0 ball
-  - 예1) 문제: 123, 답: 321 -> 2 ball 1 strike
+  - 예1) 문제: 123, 답: 321 -> 2 ball 1 strike 
+    - 두 개의 숫자는 자리가 다르지만 포함하고있고, 한 개의 숫자는 자리와 숫자가 일치 
   - 예2) 문제: 426, 답: 543 -> 1 ball
   - ![img.png](https://github.com/sang5c/spring-baseball/blob/main/images/predict.png)
 - 3개의 숫자를 모두 맞히면 게임이 종료.
   - ![img_1.png](https://github.com/sang5c/spring-baseball/blob/main/images/score.png)
 
-### 코드 설명
+### 기타
 - 지키려고 노력한 규칙들
   - 생성자 대신 팩토리 메소드 패턴을 사용
   - 원시 타입 대신 불변 객체 사용
